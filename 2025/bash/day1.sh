@@ -15,20 +15,33 @@ for step in ${steps}; do
     else
         pos=$(( pos + slice ))
     fi
-
+    echo "pos: ${pos}"
+    
     if [ ${pos} -gt 99 ]; then 
-        pos=$(( pos - 100 ))
+        pos=$(( pos % 100 ))
+        if [ $(( pos % 100)) -eq 0 ]; then
+            pos=0
+        fi
     fi
     
     if [ ${pos} -lt 0 ]; then
-        pos=$(( pos + 100))
+        pos=$(( 100 + (pos % 100) ))
+        if [ $(( pos % 100 )) -eq 0 ]; then
+            pos=0
+        fi
     fi
     
     echo "Updated position:  ${pos}"
+
     if [ ${pos} -eq 0 ]; then
         psw=$(( psw + 1))
     fi
 done
+
+
+# while read -r line; do
+#     echo "line: ${line}"
+# done < day1-input.txt
 
 echo "Password: ${psw}"
 
