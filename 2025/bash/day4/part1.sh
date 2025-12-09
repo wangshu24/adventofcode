@@ -1,5 +1,10 @@
-mapfile -t input < input.txt
-# mapfile -t input < example.txt # expected 13
+# mapfile -t input < input.txt
+mapfile -t input < example.txt # expected 13
+
+for line in "${input[@]}";do
+    line="${line%$'\r'}"
+done
+
 total=0
 prev=""
 cur="${input[0]%$'\r'}"
